@@ -1,7 +1,7 @@
 # vue-json-view-editor
 
 > VJVE is a vue component for displaying and editing javascript arrays and JSON objects.
-
+> This project is still in the demo stage
 ## Build Setup
 
 ``` bash
