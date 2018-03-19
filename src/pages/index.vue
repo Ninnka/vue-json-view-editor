@@ -30,11 +30,30 @@ export default {
       // }
       testSrc: {
         inner: {
-          string: 'test string'
+          gtiu: 'test string',
+          fr: 1,
+          yhirrew: undefined,
         },
+        gbiowarr: [
+          1,
+          2.42,
+          'btiuer',
+          true,
+          false,
+          null,
+          undefined,
+          NaN
+        ],
         inerr: {
           foiwe: {
-            goriej: 'frj'
+            goriej: 'frj',
+            vvwi: false,
+            nupoy: {
+              gnpoxdv: 321,
+              tgoisnbv3: true,
+              lasgtr: null
+            },
+            ieonv: new Date()
           }
         }
       },

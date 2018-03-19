@@ -12,7 +12,7 @@ export default {
   },
   props: {
     src: {
-      type: [Object, Array, Number, String, Boolean, null, undefined, NaN],
+      type: [Object, Array, Number, String, Boolean, Date, null, undefined, NaN],
       default () {
         return {}
       }

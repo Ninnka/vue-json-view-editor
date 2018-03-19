@@ -1,11 +1,10 @@
 <template>
-  <div class="json-var-string-row basic-row">
+  <div class="json-var-nan-row basic-row">
     <span v-if="this.varItem.key === undefined">"root"</span>
     <JsonItemKey v-else :itemKey="this.varItem.key"></JsonItemKey>
     <span class="bold-font white-space"> : </span>
-    <span class="json-value-color">
-      <JsonTypeName typeName="string" class="control-margin-right json-value-color"></JsonTypeName>
-      "{{ this.varItem.value }}"
+    <span class="no-typename json-value-color">
+      NaN
     </span>
   </div>
 </template>
@@ -15,7 +14,7 @@ import JsonTypeName from '@components/common/JsonTypeName'
 import JsonItemKey from '@components/common/JsonItemKey'
 
 export default {
-  name: 'JsonString',
+  name: 'JsonNaN',
   components: {
     JsonTypeName,
     JsonItemKey
@@ -28,29 +27,36 @@ export default {
       }
     },
     varItem: {
-      type: [Object, String],
-      default: ''
+      type: [Object, Number],
+      default () {
+        return {}
+      }
     }
   },
   data () {
-    return {
-    }
+    return {}
   },
   async created () {
-    console.log('varItem', this.varItem)
+
   },
-  methods: {
-  }
+  async mounted () {
+
+  },
+  methods: {},
+  computed: {},
 }
 </script>
 
 <style lang="less" scoped>
-  .json-var-string-row {
+  .json-var-nan-row {
     .control-margin-right {
       margin-right: 5px;
     }
     .json-value-color {
-      color: rgb(180, 104, 29);
+      color: rgb(255, 71, 72);
+    }
+    .no-typename {
+      margin-left: 8px
     }
   }
 </style>

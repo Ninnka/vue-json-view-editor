@@ -1,11 +1,11 @@
 <template>
-  <div class="json-var-string-row basic-row">
+  <div class="json-var-undefined-row basic-row">
     <span v-if="this.varItem.key === undefined">"root"</span>
     <JsonItemKey v-else :itemKey="this.varItem.key"></JsonItemKey>
     <span class="bold-font white-space"> : </span>
     <span class="json-value-color">
-      <JsonTypeName typeName="string" class="control-margin-right json-value-color"></JsonTypeName>
-      "{{ this.varItem.value }}"
+      <JsonTypeName typeName="undefined" class="control-margin-right json-value-color"></JsonTypeName>
+      undefined
     </span>
   </div>
 </template>
@@ -15,7 +15,7 @@ import JsonTypeName from '@components/common/JsonTypeName'
 import JsonItemKey from '@components/common/JsonItemKey'
 
 export default {
-  name: 'JsonString',
+  name: 'JsonUndefined',
   components: {
     JsonTypeName,
     JsonItemKey
@@ -28,29 +28,34 @@ export default {
       }
     },
     varItem: {
-      type: [Object, String],
-      default: ''
+      type: [Object, undefined],
+      default () {
+        return {}
+      }
     }
   },
   data () {
-    return {
-    }
+    return {}
   },
   async created () {
-    console.log('varItem', this.varItem)
+
   },
-  methods: {
-  }
+  async mounted () {
+
+  },
+  methods: {},
+  computed: {},
 }
 </script>
 
 <style lang="less" scoped>
-  .json-var-string-row {
+  .json-var-undefined-row {
     .control-margin-right {
       margin-right: 5px;
     }
     .json-value-color {
-      color: rgb(180, 104, 29);
+      color: rgb(110, 109, 110);
+      background-color: rgb(225, 235, 230);
     }
   }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="json-var-string-row basic-row">
+  <div class="json-var-date-row basic-row">
     <span v-if="this.varItem.key === undefined">"root"</span>
     <JsonItemKey v-else :itemKey="this.varItem.key"></JsonItemKey>
-    <span class="bold-font white-space"> : </span>
+    <span class="bold-font"> : </span>
     <span class="json-value-color">
-      <JsonTypeName typeName="string" class="control-margin-right json-value-color"></JsonTypeName>
-      "{{ this.varItem.value }}"
+      <JsonTypeName typeName="date" class="control-margin-right json-value-color"></JsonTypeName>
+      {{ this.varItem.value.toUTCString() }}
     </span>
   </div>
 </template>
@@ -15,7 +15,7 @@ import JsonTypeName from '@components/common/JsonTypeName'
 import JsonItemKey from '@components/common/JsonItemKey'
 
 export default {
-  name: 'JsonString',
+  name: 'JsonDate',
   components: {
     JsonTypeName,
     JsonItemKey
@@ -28,8 +28,10 @@ export default {
       }
     },
     varItem: {
-      type: [Object, String],
-      default: ''
+      type: [Object, Date],
+      default () {
+        return {}
+      }
     }
   },
   data () {
@@ -45,12 +47,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .json-var-string-row {
+  .json-var-date-row {
     .control-margin-right {
       margin-right: 5px;
     }
     .json-value-color {
-      color: rgb(180, 104, 29);
+      color: rgb(117, 130, 255);
     }
   }
 </style>

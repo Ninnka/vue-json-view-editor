@@ -2,10 +2,10 @@
   <div class="json-container">
     <JsonCompose v-for="(entry, index) in objectEntries" :key="index" :dataPath="dataPath" :jsonVar="{
       jsType: getJsType(entry[1]),
-      key: entry[0],
+      key: $attrs.isNumberTypeKey ? setNumberTypeKey(entry[0]) : entry[0],
       value: entry[1]
     }" :style="{
-      padding: `4px 0 4px 1.25em`
+      padding: `2px 0 2px 1.25em`
     }">
     </JsonCompose>
   </div>
@@ -50,6 +50,10 @@ export default {
       const typeOrigin = Object.prototype.toString.call(target)
       return typeOrigin.substring(8, typeOrigin.length - 1)
     },
+    setNumberTypeKey (key) {
+      const numberKey = Number(key)
+      return isNaN(numberKey) ? key : numberKey
+    }
   },
 }
 </script>

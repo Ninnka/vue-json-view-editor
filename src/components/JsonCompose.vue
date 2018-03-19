@@ -1,16 +1,14 @@
 <template>
   <div class="json-item-compose">
-    <div v-if="jsonVar && jsonVar.jsType === 'Object'">
-      <JsonObject :varItem="getVarItem()" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonObject>
-    </div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'Array'"></div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'String'">
-      <JsonString :varItem="getVarItem()" :dataPath="dataPath"></JsonString>
-    </div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'Number'"></div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'Boolean'"></div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'Undefined'"></div>
-    <div v-else-if="jsonVar && jsonVar.jsType === 'Null'"></div>
+    <JsonObject v-if="jsonVar && jsonVar.jsType === 'Object'" :varItem="getVarItem()" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonObject>
+    <JsonArray v-else-if="jsonVar && jsonVar.jsType === 'Array'" :varItem="getVarItem()" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonArray>
+    <JsonString v-else-if="jsonVar && jsonVar.jsType === 'String'" :varItem="getVarItem()" :dataPath="dataPath"></JsonString>
+    <JsonNumber v-else-if="jsonVar && jsonVar.jsType === 'Number' && !isNaN(jsonVar.value)" :varItem="getVarItem()" :dataPath="dataPath"></JsonNumber>
+    <JsonBoolean v-else-if="jsonVar && jsonVar.jsType === 'Boolean'" :varItem="getVarItem()" :dataPath="dataPath"></JsonBoolean>
+    <JsonDate v-else-if="jsonVar && jsonVar.jsType === 'Date'" :varItem="getVarItem()" :dataPath="dataPath"></JsonDate>
+    <JsonUndefined v-else-if="jsonVar && jsonVar.jsType === 'Undefined'" :varItem="getVarItem()" :dataPath="dataPath"></JsonUndefined>
+    <JsonNull v-else-if="jsonVar && jsonVar.jsType === 'Null'" :varItem="getVarItem()" :dataPath="dataPath"></JsonNull>
+    <JsonNaN v-else-if="jsonVar && isNaN(jsonVar.value)" :varItem="getVarItem()" :dataPath="dataPath"></JsonNaN>
     <div v-else>无对应类型</div>
   </div>
 </template>
@@ -29,7 +27,7 @@ export default {
       }
     },
     jsonVar: {
-      type: [Object, Array, Number, String, Boolean, null, undefined, NaN],
+      type: [Object, Array, Number, String, Boolean, Date, null, undefined, NaN],
       default: ''
     }
   },

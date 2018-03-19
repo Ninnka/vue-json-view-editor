@@ -1,26 +1,24 @@
 <template>
-  <div class="json-var-object-row">
-    <div class="row-start var-object-start">
+  <div class="json-var-array-row">
+    <div class="row-start var-array-start">
       <i class="iconfont icon-down-arrow-normal i-pointer" v-if="showSubAttrs" @click="toggleExpand"></i>
       <i class="iconfont icon-right-arrow-normal i-pointer" v-else @click="toggleExpand"></i>
       <span v-if="this.varItem.key === undefined">"root"</span>
       <JsonItemKey v-else :itemKey="this.varItem.key"></JsonItemKey>
-      <!-- <span v-else>"{{ this.varItem.key }}"</span> -->
       <span class="bold-font white-space"> : </span>
-      <span>{</span>
-      <!-- <span class="white-space" v-if="!showSubAttrs">...</span> -->
+      <span>[</span>
       <span v-if="!showSubAttrs">
         <JsonRowOmission></JsonRowOmission>
-        <span>}</span>
+        <span>]</span>
       </span>
-      <JsonTypeName typeName="object"></JsonTypeName>
+      <JsonTypeName typeName="array"></JsonTypeName>
       <object-size :target="varItem.value"></object-size>
     </div>
-    <JsonContainer v-show="showSubAttrs" :varItem="varItem" :dataPath="calcDataPath()"></JsonContainer>
-    <div v-if="showSubAttrs" class="row-end var-object-end">
+    <JsonContainer v-show="showSubAttrs" :varItem="varItem" :isNumberTypeKey="true" :dataPath="calcDataPath()"></JsonContainer>
+    <div v-if="showSubAttrs" class="row-end var-array-end">
       <span :style="{
         marginLeft: '.4em'
-      }">}</span>
+      }">]</span>
     </div>
   </div>
 </template>
@@ -32,7 +30,7 @@ import JsonItemKey from '@components/common/JsonItemKey'
 import JsonRowOmission from '@components/common/JsonRowOmission'
 
 export default {
-  name: 'JsonObject',
+  name: 'JsonArray',
   components: {
     ObjectSize,
     JsonTypeName,
@@ -49,7 +47,7 @@ export default {
     varItem: {
       type: [Object],
       default () {
-        return {}
+        return []
       }
     },
     viewExpanded: {
@@ -85,7 +83,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .json-var-object-row {
+  .json-var-array-row {
 
   }
 </style>
