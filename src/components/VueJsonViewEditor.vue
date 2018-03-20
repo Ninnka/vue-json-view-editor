@@ -11,15 +11,48 @@ export default {
   components: {
   },
   props: {
+    // * 数据源
     src: {
       type: [Object, Array, Number, String, Boolean, Date, null, undefined, NaN],
       default () {
         return {}
       }
     },
+    // * 是否展开视图
     viewExpanded: {
       type: [Boolean, Function],
       default: true
+    },
+    // * 省略这个长度以外的字符
+    collapseString: {
+      type: [Number, Boolean],
+      default: -1
+    },
+    // * 缩进
+    indentWidth: {
+      type: [Number],
+      default: 4
+    },
+    // * 是否能添加元素（数组和对象）
+    add: {
+      type: [Function, Boolean],
+      default () {
+        return false
+      }
+    },
+    // * 是否能删除元素
+    delete: {
+      type: [Function, Boolean],
+      default () {
+        return false
+      }
+    },
+    // * 是否能编辑元素
+    edit: {
+      type: [Function, Boolean],
+      default () {
+        return false
+      }
     }
   },
   data () {

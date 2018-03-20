@@ -46,6 +46,20 @@ Vue.mixin({
   }
 })
 
+// * directive
+Vue.directive('mouseaction', {
+  bind (el, binding, vnode) {
+    // console.log('vnode', vnode)
+    el.addEventListener('mouseenter', vnode.context.mouseenter)
+    el.addEventListener('mouseleave', vnode.context.mouseleave)
+  },
+  unbind (el, binding, vnode) {
+    // console.log('vnode', vnode)
+    el.removeEventListener('mouseenter', vnode.context.mouseenter)
+    el.removeEventListener('mouseleave', vnode.context.mouseleave)
+  }
+})
+
 // * env
 Vue.config.productionTip = false
 

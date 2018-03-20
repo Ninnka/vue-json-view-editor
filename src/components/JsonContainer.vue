@@ -1,6 +1,6 @@
 <template>
   <div class="json-container">
-    <JsonCompose v-for="(entry, index) in objectEntries" :key="index" :dataPath="dataPath" :jsonVar="{
+    <JsonCompose v-for="(entry) in objectEntries" :key="entry[0]" :dataPath="dataPath" :jsonVar="{
       jsType: getJsType(entry[1]),
       key: $attrs.isNumberTypeKey ? setNumberTypeKey(entry[0]) : entry[0],
       value: entry[1]
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import _isEqual from 'lodash.isequal'
+
 export default {
   name: 'JsonContainer',
   inheritAttrs: false,
@@ -33,17 +35,21 @@ export default {
     },
   },
   data () {
-    return {}
+    return {
+      objectEntries: []
+    }
+  },
+  async created () {
+    this.objectEntries = this.getEntries(this.varItem)
   },
   async mounted () {
-    // console.log('$attrs.dataPath', this.$attrs.dataPath)
   },
   computed: {
-    objectEntries () {
-      const entries = this.varItem && this.varItem.value ? Object.entries(this.varItem.value) : []
-      console.log('JsonContainer entries', entries)
-      return entries
-    },
+    // objectEntries () {
+    //   const entries = this.varItem && this.varItem.value ? Object.entries(this.varItem.value) : []
+    //   console.log('JsonContainer entries', entries)
+    //   return entries
+    // },
   },
   methods: {
     getJsType (target) {
@@ -53,8 +59,20 @@ export default {
     setNumberTypeKey (key) {
       const numberKey = Number(key)
       return isNaN(numberKey) ? key : numberKey
+    },
+    getEntries (origin) {
+      return origin && origin.value ? Object.entries(origin.value) : []
     }
   },
+  watch: {
+    // * 手动监听varItem的变化，如果变化了则重新设置objectEntries
+    varItem (newVal, oldVal) {
+      if (!_isEqual(newVal, oldVal)) {
+        this.objectEntries = this.getEntries(newVal)
+        console.log('is not equal')
+      }
+    }
+  }
 }
 </script>
 

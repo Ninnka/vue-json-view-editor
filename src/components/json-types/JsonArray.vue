@@ -1,5 +1,5 @@
 <template>
-  <div class="json-var-array-row">
+  <div class="json-var-array-row" v-mouseaction>
     <div class="row-start var-array-start">
       <i class="iconfont icon-down-arrow-normal i-pointer" v-if="showSubAttrs" @click="toggleExpand"></i>
       <i class="iconfont icon-right-arrow-normal i-pointer" v-else @click="toggleExpand"></i>
@@ -7,15 +7,16 @@
       <JsonItemKey v-else :itemKey="this.varItem.key"></JsonItemKey>
       <span class="bold-font white-space"> : </span>
       <span>[</span>
-      <span v-if="!showSubAttrs">
+      <span v-show="!showSubAttrs">
         <JsonRowOmission></JsonRowOmission>
         <span>]</span>
       </span>
       <JsonTypeName typeName="array"></JsonTypeName>
       <object-size :target="varItem.value"></object-size>
+      <JsonActions v-show="mouseInArea" :actionList="actionList" @action:copy="copyAction" @action:add="addAction" @action:delete="deleteAction" @action:edit="editAction"></JsonActions>
     </div>
     <JsonContainer v-show="showSubAttrs" :varItem="varItem" :isNumberTypeKey="true" :dataPath="calcDataPath()"></JsonContainer>
-    <div v-if="showSubAttrs" class="row-end var-array-end">
+    <div v-show="showSubAttrs" class="row-end var-array-end">
       <span :style="{
         marginLeft: '.4em'
       }">]</span>
@@ -28,6 +29,9 @@ import ObjectSize from '@components/common/ObjectSize'
 import JsonTypeName from '@components/common/JsonTypeName'
 import JsonItemKey from '@components/common/JsonItemKey'
 import JsonRowOmission from '@components/common/JsonRowOmission'
+import JsonActions from '@components/common/JsonActions'
+
+import mouseActionMixin from '@mixins/mouse-action-mixin'
 
 export default {
   name: 'JsonArray',
@@ -35,8 +39,12 @@ export default {
     ObjectSize,
     JsonTypeName,
     JsonItemKey,
-    JsonRowOmission
+    JsonRowOmission,
+    JsonActions
   },
+  mixins: [
+    mouseActionMixin
+  ],
   props: {
     dataPath: {
       type: Array,
@@ -47,7 +55,7 @@ export default {
     varItem: {
       type: [Object],
       default () {
-        return []
+        return {}
       }
     },
     viewExpanded: {
@@ -57,7 +65,8 @@ export default {
   },
   data () {
     return {
-      showSubAttrs: true
+      showSubAttrs: true,
+      actionList: ['copy', 'add', 'delete', 'edit']
     }
   },
   async created () {
@@ -72,7 +81,19 @@ export default {
     },
     calcDataPath () {
       return this.varItem.key ? this.dataPath.concat([this.varItem.key]) : this.dataPath
-    }
+    },
+    copyAction () {
+      console.log('copyAction')
+    },
+    addAction () {
+      console.log('addAction')
+    },
+    deleteAction () {
+      console.log('deleteAction')
+    },
+    editAction () {
+      console.log('editAction')
+    },
   },
   watch: {
     viewExpanded (newVal, oldVal) {

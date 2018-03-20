@@ -1,6 +1,13 @@
 <template>
   <div id="app-index" class="app-index">
-    <vue-json-view-editor :src="testSrc" :viewExpanded="viewExpanded"></vue-json-view-editor>
+    <vue-json-view-editor
+      :src="testSrc"
+      :viewExpanded="viewExpanded"
+      :indentWidth="4"
+      :add="addJsonRow"
+      :delete="deleteJsonRow"
+      :edit="editJsonRow">
+    </vue-json-view-editor>
   </div>
 </template>
 
@@ -14,20 +21,16 @@ export default {
   },
   data () {
     return {
-      // testSrc: {
-      //   string: 'this is a string text',
-      //   integer: 42,
-      //   array: [1, 2, 3, 'array-stringtest', NaN],
-      //   float: 3.14159,
-      //   undefined: undefined,
-      //   object: {
-      //     'first-child': true,
-      //     'second-child': false,
-      //     'last-child': null
-      //   },
-      //   'string-number': '12345',
-      //   date: new Date().toString()
-      // }
+      // testSrc: [
+      //   1,
+      //   2.42,
+      //   'btiuer',
+      //   true,
+      //   false,
+      //   null,
+      //   undefined,
+      //   NaN
+      // ],
       testSrc: {
         inner: {
           gtiu: 'test string',
@@ -66,7 +69,17 @@ export default {
   async mounted () {
 
   },
-  methods: {},
+  methods: {
+    addJsonRow (data) {
+
+    },
+    deleteJsonRow (data) {
+
+    },
+    editJsonRow (data) {
+
+    }
+  },
   computed: {},
 }
 </script>
