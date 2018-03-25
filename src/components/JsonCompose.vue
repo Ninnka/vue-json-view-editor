@@ -1,19 +1,21 @@
 <template>
   <div class="json-item-compose">
-    <JsonObject v-if="jsonVar && jsonVar.jsType === 'Object'" :varItem="getVarItem()" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonObject>
-    <JsonArray v-else-if="jsonVar && jsonVar.jsType === 'Array'" :varItem="getVarItem()" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonArray>
-    <JsonString v-else-if="jsonVar && jsonVar.jsType === 'String'" :varItem="getVarItem()" :dataPath="dataPath"></JsonString>
-    <JsonNumber v-else-if="jsonVar && jsonVar.jsType === 'Number' && !isNaN(jsonVar.value)" :varItem="getVarItem()" :dataPath="dataPath"></JsonNumber>
-    <JsonBoolean v-else-if="jsonVar && jsonVar.jsType === 'Boolean'" :varItem="getVarItem()" :dataPath="dataPath"></JsonBoolean>
-    <JsonDate v-else-if="jsonVar && jsonVar.jsType === 'Date'" :varItem="getVarItem()" :dataPath="dataPath"></JsonDate>
-    <JsonUndefined v-else-if="jsonVar && jsonVar.jsType === 'Undefined'" :varItem="getVarItem()" :dataPath="dataPath"></JsonUndefined>
-    <JsonNull v-else-if="jsonVar && jsonVar.jsType === 'Null'" :varItem="getVarItem()" :dataPath="dataPath"></JsonNull>
-    <JsonNaN v-else-if="jsonVar && isNaN(jsonVar.value)" :varItem="getVarItem()" :dataPath="dataPath"></JsonNaN>
+    <JsonObject v-if="varItem && varItem.jsType === 'Object'" :varItem="varItem" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonObject>
+    <JsonArray v-else-if="varItem && varItem.jsType === 'Array'" :varItem="varItem" :dataPath="dataPath" :viewExpanded="$attrs.viewExpanded"></JsonArray>
+    <JsonString v-else-if="varItem && varItem.jsType === 'String'" :varItem="varItem" :dataPath="dataPath"></JsonString>
+    <JsonNumber v-else-if="varItem && varItem.jsType === 'Number' && !isNaN(varItem.value)" :varItem="varItem" :dataPath="dataPath"></JsonNumber>
+    <JsonBoolean v-else-if="varItem && varItem.jsType === 'Boolean'" :varItem="varItem" :dataPath="dataPath"></JsonBoolean>
+    <JsonDate v-else-if="varItem && varItem.jsType === 'Date'" :varItem="varItem" :dataPath="dataPath"></JsonDate>
+    <JsonUndefined v-else-if="varItem && varItem.jsType === 'Undefined'" :varItem="varItem" :dataPath="dataPath"></JsonUndefined>
+    <JsonNull v-else-if="varItem && varItem.jsType === 'Null'" :varItem="varItem" :dataPath="dataPath"></JsonNull>
+    <JsonNaN v-else-if="varItem && isNaN(varItem.value)" :varItem="varItem" :dataPath="dataPath"></JsonNaN>
     <div v-else>无对应类型</div>
   </div>
 </template>
 
 <script>
+import _isEqual from 'lodash.isequal'
+
 export default {
   name: 'JsonCompose',
   components: {
@@ -27,24 +29,47 @@ export default {
       }
     },
     jsonVar: {
-      type: [Object, Array, Number, String, Boolean, Date, null, undefined, NaN],
-      default: ''
+      type: Object
     }
   },
   data () {
     return {
-
+      varItem: {}
     }
   },
+  created () {
+    this.varItem = this.setVarItem(this.jsonVar)
+  },
   methods: {
-    getVarItem () {
+    // getVarItem () {
+    //   if (this.isRoot) {
+    //     return this.jsonVar
+    //   }
+    //   return {
+    //     jsType: this.jsonVar.jsType,
+    //     key: this.jsonVar.key,
+    //     value: this.jsonVar.value,
+    //   }
+    // },
+    setVarItem (val) {
       if (this.isRoot) {
-        return this.jsonVar
+        return val
       }
       return {
-        jsType: this.jsonVar.jsType,
-        key: this.jsonVar.key,
-        value: this.jsonVar.value,
+        jsType: val.jsType,
+        key: val.key,
+        value: val.value,
+      }
+    },
+    isNone () {
+      return this.jsonVar.jsType !== 'Object' && this.jsonVar.jsType !== 'Array' && this.jsonVar.jsType !== 'String' && this.jsonVar.jsType !== 'Number' && this.jsonVar.jsType !== 'Boolean' && this.jsonVar.jsType !== 'Date' && this.jsonVar.jsType !== 'Undefined' && this.jsonVar.jsType !== 'Null'
+    }
+  },
+  watch: {
+    jsonVar (newVal, oldVal) {
+      if (!_isEqual(newVal, oldVal)) {
+        this.varItem = this.setVarItem(newVal)
+        console.log('is not equal')
       }
     }
   }

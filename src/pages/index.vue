@@ -32,11 +32,7 @@ export default {
       //   NaN
       // ],
       testSrc: {
-        inner: {
-          gtiu: 'test string',
-          fr: 1,
-          yhirrew: undefined,
-        },
+        dq: 'dgv',
         gbiowarr: [
           1,
           2.42,
@@ -47,18 +43,18 @@ export default {
           undefined,
           NaN
         ],
-        inerr: {
-          foiwe: {
-            goriej: 'frj',
-            vvwi: false,
-            nupoy: {
-              gnpoxdv: 321,
-              tgoisnbv3: true,
-              lasgtr: null
-            },
-            ieonv: new Date()
-          }
-        }
+        // inerr: {
+        //   foiwe: {
+        //     goriej: 'frj',
+        //     vvwi: false,
+        //     nupoy: {
+        //       gnpoxdv: 321,
+        //       tgoisnbv3: true,
+        //       lasgtr: null
+        //     },
+        //     ieonv: new Date()
+        //   }
+        // }
       },
       viewExpanded: true
     }
@@ -67,7 +63,15 @@ export default {
 
   },
   async mounted () {
-
+    // ! test
+    setTimeout(() => {
+      this.testSrc = {
+        ...this.testSrc,
+        bvs: {
+          gtis: 'gtrj'
+        }
+      }
+    }, 2000)
   },
   methods: {
     addJsonRow (data) {

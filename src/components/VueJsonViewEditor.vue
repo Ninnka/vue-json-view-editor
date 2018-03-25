@@ -1,7 +1,6 @@
 <template>
   <div id="json-view-editor" class="json-view-editor">
     <JsonCompose :jsonVar="composeSrc" :isRoot="true" :dataPath="calcDataPath()" :viewExpanded="viewExpanded"></JsonCompose>
-    <!-- <json-container v-else :varItem="composeSrc" :isRoot="true"></json-container> -->
   </div>
 </template>
 
@@ -74,12 +73,12 @@ export default {
     },
     calcDataPath () {
       return []
-    }
+    },
     // isBasicType (target) {
     //   const jsType = this.getJsType(this.src)
     //   return jsType === 'String' || jsType === 'Number' || jsType === 'Boolean'
     // }
-  }
+  },
 }
 </script>
 

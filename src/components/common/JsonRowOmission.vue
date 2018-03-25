@@ -23,6 +23,6 @@ export default {
 <style lang="less" scoped>
   .json-row-omission {
     color: rgb(180, 104, 29);
-    font-size: 1.2em;
+    font-weight: bold;
   }
 </style>

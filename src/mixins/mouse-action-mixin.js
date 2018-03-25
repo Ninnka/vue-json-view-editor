@@ -7,19 +7,11 @@ export default {
   methods: {
     mouseenter (event) {
       this.mouseInArea = true
+      event.stopPropagation()
     },
     mouseleave (event) {
       this.mouseInArea = false
-    }
-  },
-  watch: {
-    mouseInArea (newVal, oldVal) {
-      // const logData = {
-      //   componentName: this.$options._componentTag,
-      //   newVal,
-      //   oldVal
-      // }
-      // console.table(logData)
+      event.stopPropagation()
     }
   }
 }

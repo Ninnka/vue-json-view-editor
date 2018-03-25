@@ -70,7 +70,6 @@ export default {
     }
   },
   async created () {
-    console.log('varItem', this.varItem)
     this.showSubAttrs = this.viewExpanded
   },
   computed: {

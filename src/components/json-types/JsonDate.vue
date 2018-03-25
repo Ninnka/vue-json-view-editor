@@ -39,7 +39,6 @@ export default {
     }
   },
   async created () {
-    console.log('varItem', this.varItem)
   },
   methods: {
   }

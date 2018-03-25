@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import _isEqual from 'lodash.isequal'
+// import _isEqual from 'lodash.isequal'
 
 export default {
   name: 'JsonContainer',
@@ -36,20 +36,20 @@ export default {
   },
   data () {
     return {
-      objectEntries: []
+      // objectEntries: []
     }
   },
   async created () {
-    this.objectEntries = this.getEntries(this.varItem)
+    // this.objectEntries = this.getEntries(this.varItem)
   },
   async mounted () {
   },
   computed: {
-    // objectEntries () {
-    //   const entries = this.varItem && this.varItem.value ? Object.entries(this.varItem.value) : []
-    //   console.log('JsonContainer entries', entries)
-    //   return entries
-    // },
+    objectEntries () {
+      const entries = this.varItem && this.varItem.value ? Object.entries(this.varItem.value) : []
+      // console.log('JsonContainer entries', entries)
+      return entries
+    },
   },
   methods: {
     getJsType (target) {
@@ -64,15 +64,6 @@ export default {
       return origin && origin.value ? Object.entries(origin.value) : []
     }
   },
-  watch: {
-    // * 手动监听varItem的变化，如果变化了则重新设置objectEntries
-    varItem (newVal, oldVal) {
-      if (!_isEqual(newVal, oldVal)) {
-        this.objectEntries = this.getEntries(newVal)
-        console.log('is not equal')
-      }
-    }
-  }
 }
 </script>
 
