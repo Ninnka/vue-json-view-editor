@@ -1,8 +1,13 @@
 {
   "name": "vue-json-view-editor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "author": "Rennzh <hennzr@gmail.com>",
+  "keywords": [
+    "vue",
+    "json",
+    "editor"
+  ],
   "private": false,
   "main": "dist/json-view-editor.min.js",
   "repository": {
