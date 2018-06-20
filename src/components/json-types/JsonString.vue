@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import JsonTypeName from '@components/common/JsonTypeName'
-import JsonItemKey from '@components/common/JsonItemKey'
+import JsonTypeName from '@/components/common/JsonTypeName'
+import JsonItemKey from '@/components/common/JsonItemKey'
 
 export default {
   name: 'JsonString',

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'VueJsonViewEditor',
+  name: 'JsonViewEditor',
   components: {
   },
   props: {

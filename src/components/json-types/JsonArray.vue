@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import ObjectSize from '@components/common/ObjectSize'
-import JsonTypeName from '@components/common/JsonTypeName'
-import JsonItemKey from '@components/common/JsonItemKey'
-import JsonRowOmission from '@components/common/JsonRowOmission'
-import JsonActions from '@components/common/JsonActions'
+import ObjectSize from '@/components/common/ObjectSize'
+import JsonTypeName from '@/components/common/JsonTypeName'
+import JsonItemKey from '@/components/common/JsonItemKey'
+import JsonRowOmission from '@/components/common/JsonRowOmission'
+import JsonActions from '@/components/common/JsonActions'
 
-import mouseActionMixin from '@mixins/mouse-action-mixin'
+import mouseActionMixin from '@/mixins/mouse-action-mixin'
 
 export default {
   name: 'JsonArray',
