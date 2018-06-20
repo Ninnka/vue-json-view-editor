@@ -1,6 +1,6 @@
 # vue-json-view-editor
 
-> A vue component that simulate native Android component-tabLayout (一个模仿安卓tabLayout的Vue组件)
+> A vue component that format json
 
 ## Install
 
@@ -8,50 +8,113 @@
 npm i -S vue-json-view-editor
 ```
 
+## Example
+
+![example](./example.png)
+
 ## Usage
 
-### swipe-tab-container Attributes
+```javascript
+// main.js
+// ...
+import JsonViewEditor from 'vue-json-view-editor';
+Vue.use(JsonViewEditor);
+```
+
+```javascript
+// view.vue
+export default {
+  name: 'View',
+
+  data () {
+    return {
+      testSrc: {
+        dq: 'dgv',
+        gbiowarr: [
+          1,
+          2.42,
+          'btiuer',
+          true,
+          false,
+          null,
+          undefined,
+          NaN
+        ],
+        inerr: {
+          foiwe: {
+            goriej: 'frj',
+            vvwi: false,
+            nupoy: {
+              gnpoxdv: 321,
+              tgoisnbv3: true,
+              lasgtr: null
+            },
+            ieonv: new Date()
+          }
+        }
+      },
+      viewExpanded: true
+    }
+  },
+
+  async mounted () {
+    // test
+    setTimeout(() => {
+      this.testSrc = {
+        ...this.testSrc,
+        bvs: {
+          gtis: 'gtrj'
+        }
+      }
+    }, 2000)
+  },
+
+  methods: {
+    addJsonRow (data) {
+
+    },
+
+    deleteJsonRow (data) {
+
+    },
+
+    editJsonRow (data) {
+
+    }
+  },
+}
+```
+
+
+```html
+<!-- view.vue -->
+<template>
+  <vue-json-view-editor
+    :src="testSrc"
+    :viewExpanded="viewExpanded"
+    :indentWidth="4"
+    :add="addJsonRow"
+    :delete="deleteJsonRow"
+    :edit="editJsonRow">
+  </vue-json-view-editor>
+</template>
+```
+
+### JsonViewEditor Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | ---- | --- | --- | ---- | ----- |
-| owner | 当前组件的拥有者，可以设置为所在的路由页面或者父组件 | String | - | '' |
-| tabNavList | tab-nav 对象列表 | Array | - | [] |
-| currentTabIndex | 当前所在的tab index | Number | - | 0 |
-| indicatorWidthScaleFactor | nav-indicator的宽度控制因子 | Number | - | 0.1 |
-| swipeTabNavWrapperStyle | tab-nav的容器的自定义样式 | Object | - | {} |
-| swipeTabContentItemStyle | tab-content的容器的自定义样式 | Object | - | {} |
-| fullFlex | nav-item是否平分父级宽度 | Boolean | - | false |
+| src | 数据源 | Object, Array, Number, String, Boolean, Date, null, undefined, NaN | - | {} |
+| viewExpanded | 是否展开视图 | Boolean | - | true |
+| collapseString | 省略这个长度以外的字符，-1表示不省略 | Number | - | -1 |
+| indentWidth | 缩进的长度 | Number | - | 4 |
+| add | 添加属性后的回调 | Function/Boolean | - | false |
+| delete | 删除属性后的回调 | Function/Boolean | - | false |
+| edit | 修改属性后的回调 | Function/Boolean | - | false |
 
-### swipe-tab-container event
+## RoadMap
 
-| 事件名 | 说明 | 回调参数 |
-| ---- | --- | ----- |
-| tabNavClick | 单击 nav-item | { event: Event, index: Number, tabNav: Object } |
-| tabNavdblClick | 双击 nav-item | { event: Event, index: Number, tabNav: Object } |
-
-### swipe-tab-container slots
-
-```
-for (tabNav of tabNavList) { /* ... */ }
-```
-
-| slot名 | 说明 |
-| ---- | --- |
-| `swipe-tab-nav-${tabNav.key}` | 遍历 tabNavList 中的每一个对象，利用key创建slot |
-| `swipe-tab-content-${tabNav.key}` | 遍历 tabNavList 中的每一个对象，利用key创建slot |
-
-### swipe-tab-nav Attributes
-
-| 参数 | 说明 | 类型 | 可选值 | 默认值 |
-| ---- | --- | --- | ---- | ----- |
-| owner | 当前组件的拥有者，可以设置为所在的路由页面或者父组件 | String | - | '' |
-| tabLabel | 显示的内容 | String | - | '' |
-
-### swipe-tab-nav slots
-
-| name | 说明 |
-| ---- | --- |
-| default | 替换默认的文本 |
+1. 完善添加、修改、删除功能
 
 ## Preview Demo
 
