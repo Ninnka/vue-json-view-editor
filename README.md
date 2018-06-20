@@ -89,14 +89,14 @@ export default {
 ```html
 <!-- view.vue -->
 <template>
-  <vue-json-view-editor
+  <json-view-editor
     :src="testSrc"
     :viewExpanded="viewExpanded"
     :indentWidth="4"
     :add="addJsonRow"
     :delete="deleteJsonRow"
     :edit="editJsonRow">
-  </vue-json-view-editor>
+  </json-view-editor>
 </template>
 ```
 

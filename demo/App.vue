@@ -1,25 +1,25 @@
 <template>
   <div id="app">
     <div id="app-index" class="app-index">
-      <vue-json-view-editor
+      <json-view-editor
         :src="testSrc"
         :viewExpanded="viewExpanded"
         :indentWidth="4"
         :add="addJsonRow"
         :delete="deleteJsonRow"
         :edit="editJsonRow">
-      </vue-json-view-editor>
+      </json-view-editor>
     </div>
   </div>
 </template>
 
 <script>
-import VueJsonViewEditor from '@/components/VueJsonViewEditor'
+import JsonViewEditor from '@/components/VueJsonViewEditor'
 
 export default {
   name: 'Index',
   components: {
-    VueJsonViewEditor
+    JsonViewEditor
   },
   data () {
     return {
